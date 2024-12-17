@@ -5,17 +5,21 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/argoproj/applicationset.git
+        repoURL: https://github.com/gregkroon/applicationset.git
         revision: HEAD
         files:
         - path: "examples/git-generator-files-discovery/cluster-config/**/config.json"
   template:
     metadata:
       name: '{{cluster.name}}-guestbook'
+      labels: 
+        harness.io/envRef: '{{envTag}}'
+        harness.io/serviceRef: '{{serviceTag}}'
+        harness.io/buildRef: '{{releaseTag}}'
     spec:
-      project: default
+      project: 5b758ebb
       source:
-        repoURL: https://github.com/argoproj/applicationset.git
+        repoURL: https://github.com/gregkroon/applicationset.git
         targetRevision: HEAD
         path: "examples/git-generator-files-discovery/apps/guestbook"
       destination:
